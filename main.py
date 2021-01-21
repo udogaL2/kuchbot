@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+from random import randint
 
 bot = telebot.TeleBot('1522582454:AAGK3_IIqjkFzQR1VsezBMku3a181vU3mq0')
 
@@ -23,7 +24,13 @@ def ans(msg):
         if msg.text == 'Где куч?':
             bot.send_message(msg.chat.id, 'Он скоро придёт.')
         elif msg.text == 'Через сколько придет куч?':
-            bot.send_message(msg.chat.id, 'Он придёт через 3 секунды.')
+            s = randint(1, 10)
+            l = 'ы'
+            if s == 1:
+                l = 'у'
+            elif s in range(5, 11):
+                l = ''
+            bot.send_message(msg.chat.id, 'Он придёт через {} секунд{}.'.format(str(s), l))
         else:
             bot.send_message(msg.chat.id, 'Зачем мне писать что-то, кроме сообщений о местоположении куча?')
 
