@@ -24,12 +24,10 @@ def ans(msg):
         if msg.text == 'Где куч?':
             bot.send_message(msg.chat.id, 'Он скоро придёт.')
         elif msg.text == 'Через сколько придет куч?':
-            s = randint(1, 10)
+            s = randint(1, 3)
             l = 'ы'
             if s == 1:
                 l = 'у'
-            elif s in range(5, 11):
-                l = ''
             bot.send_message(msg.chat.id, 'Он придёт через {} секунд{}.'.format(str(s), l))
         else:
             bot.send_message(msg.chat.id, 'Зачем мне писать что-то, кроме сообщений о местоположении куча?')
