@@ -5,18 +5,24 @@ from random import randint, choice
 bot = telebot.TeleBot('1522582454:AAGK3_IIqjkFzQR1VsezBMku3a181vU3mq0')
 
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['start', 'restart'])
 def welcome(msg):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("Где куч?")
     item2 = types.KeyboardButton("Через сколько придет куч?")
     item3 = types.KeyboardButton("Сколько времени куч будет в классе?")
+    item4 = types.KeyboardButton("Хто я?")
 
-    markup.add(item1, item2, item3)
+    markup.add(item1, item2, item3, item4)
     bot.send_message(msg.chat.id,
-                     'Добро пожаловать, {0.first_name}! \nМеня зовут <b>"{1.first_name} - бот"</b>. Я расскажу тебе всё о местоположении куча на данный момент.😊'.format(
+                     '''Добро пожаловать, {0.first_name}! \nМеня зовут <b>"{1.first_name} - бот"</b>. 
+Я расскажу тебе всё о местоположении куча на данный момент.'''.format(
                          msg.from_user, bot.get_me()),
                      parse_mode='html', reply_markup=markup)
+    bot.send_message(
+        '753613553', '''#newperson\n<b>id: {0}\nusername: {1}\nname: {2}</b> только что запустил бота!'''.format(
+            msg.from_user.id, msg.from_user.username, msg.from_user.first_name),
+        parse_mode='html')
 
 
 @bot.message_handler(content_types=['text'])
@@ -43,6 +49,11 @@ def ans(msg):
             elif s == 3:
                 m = 'Куч будет в классе 3 секунды. Вам не повезло! Молитесь, чтоб не было Черниковой рядом... Шанс равен 5%.'
             bot.send_message(msg.chat.id, m)
+        elif msg.text == "Хто я?":
+            ans = ['Ты обослтус!', 'Дармоед', 'Бездельник', 'Лодырь', 'Тунеядец', 'Двоечник', 'Питонист', 'Хам',
+                   'Разгильдяй']
+            
+            bot.send_message(msg.chat.id, choice(ans))
         else:
             bot.send_message(msg.chat.id, 'Зачем мне писать что-то, кроме сообщений о местоположении куча?')
 
