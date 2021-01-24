@@ -1,9 +1,13 @@
 import telebot
 from telebot import types
 from random import randint, choice
+from create_user import make_user
+import time
+from multiprocessing import *
+import schedule
+from get_id import get_id
 
 bot = telebot.TeleBot('1522582454:AAGK3_IIqjkFzQR1VsezBMku3a181vU3mq0')
-
 # ________________________________
 
 main_markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -35,7 +39,43 @@ NAMES = ['Ты обослтус!', 'Дармоед', 'Бездельник', 'Л
 # ________________________________
 
 
-@bot.message_handler(commands=['start', 'restart'])
+def start_process():
+    p1 = Process(target=P_schedule.start_schedule, args=())
+    p1.start()
+
+
+class P_schedule():
+    def start_schedule():
+        schedule.every().monday.at("14:20").do(P_schedule.send_message1)
+        schedule.every().tuesday.at("12:30").do(P_schedule.send_message1)
+        schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
+        schedule.every().wednesday.at("11:40").do(P_schedule.send_message1)
+        schedule.every().friday.at("09:40").do(P_schedule.send_message1)
+        schedule.every().friday.at("10:40").do(P_schedule.send_message1)
+        schedule.every().monday.at("14:25").do(P_schedule.send_message2)
+        schedule.every().tuesday.at("12:35").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("10:45").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("11:45").do(P_schedule.send_message2)
+        schedule.every().friday.at("09:45").do(P_schedule.send_message2)
+        schedule.every().friday.at("10:45").do(P_schedule.send_message2)
+        schedule.every(1).minute.do(P_schedule.send_message2)
+
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+
+    def send_message1():
+        id = get_id()
+        for i in id:
+            bot.send_message(i, 'Я скоро приду.')
+
+    def send_message2():
+        id = get_id()
+        for i in id:
+            bot.send_message(i, 'Я обязательно приду!')
+
+
+@bot.message_handler(commands=['start'])
 def welcome(msg):
     bot.send_message(msg.chat.id,
                      '''Добро пожаловать, {0.first_name}! \nМеня зовут <b>"{1.first_name} - бот"</b>. 
@@ -46,6 +86,17 @@ def welcome(msg):
         '753613553', '''#newperson\n<b>id: {0}\nusername: {1}\nname: {2}</b> только что запустил бота!'''.format(
             msg.from_user.id, msg.from_user.username, msg.from_user.first_name),
         parse_mode='html')
+
+    make_user(msg.from_user.id, msg.from_user.username)
+
+
+@bot.message_handler(commands=['restart'])
+def welcome(msg):
+    bot.send_message(msg.chat.id,
+                     '''Добро пожаловать, {0.first_name}! \nМеня зовут <b>"{1.first_name} - бот"</b>. 
+Я расскажу тебе всё о местоположении куча на данный момент.'''.format(
+                         msg.from_user, bot.get_me()),
+                     parse_mode='html', reply_markup=main_markup)
 
 
 @bot.message_handler(content_types=['text'])
@@ -113,4 +164,9 @@ def ans(msg):
                              reply_markup=main_markup)
 
 
-bot.polling(none_stop=True)
+if __name__ == '__main__':
+    start_process()
+    try:
+        bot.polling(none_stop=True)
+    except Exception:
+        pass
