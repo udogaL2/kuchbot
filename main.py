@@ -167,6 +167,12 @@ def ans(msg):
                              reply_markup=main_markup)
 
 
+@bot.message_handler(content_types=['sticker'])
+def sticker(msg):
+    sti = open('img/sticker.webp', 'rb')
+    bot.send_sticker(msg.chat.id, sti)
+
+
 if __name__ == '__main__':
     start_process()
     try:
