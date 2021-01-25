@@ -62,7 +62,7 @@ class P_schedule():
         schedule.every().friday.at("07:45").do(P_schedule.send_message2)
         schedule.every().friday.at("08:45").do(P_schedule.send_message2)
 
-        schedule.every().friday.at("16:00").do(P_schedule.send_message1)
+        schedule.every().monday.at("15:03").do(P_schedule.send_message1)
 
         while True:
             schedule.run_pending()
