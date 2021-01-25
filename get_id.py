@@ -15,4 +15,4 @@ def get_id():
 
     rows = cur.fetchall()
     con.close()
-    return [i[0] for i in rows]
+    return rows

@@ -67,13 +67,13 @@ class P_schedule():
             time.sleep(1)
 
     def send_message1():
-        id = get_id()
+        id = [i[0] for i in get_id()]
         for i in id:
             bot.send_message(i, 'Я скоро приду.')
         print('Я приду')
 
     def send_message2():
-        id = get_id()
+        id = [i[0] for i in get_id()]
         for i in id:
             bot.send_message(i, 'Я обязательно приду!')
         print('Я обязательно приду')
@@ -97,8 +97,9 @@ def welcome(msg):
 
 @bot.message_handler(commands=['getusers'])
 def give_id(msg):
-    if msg.from_user.id == '753613553':
-        bot.send_message(msg.from_user.id, '\n'.join(get_id()))
+    if msg.chat.id == 753613553:
+        s = [i[0] + ' - ' + i[1] for i in get_id()]
+        bot.send_message(msg.chat.id, '\n'.join(s))
 
 
 @bot.message_handler(content_types=['text'])
