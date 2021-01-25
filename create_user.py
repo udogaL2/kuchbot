@@ -17,8 +17,9 @@ def make_user(id, name):
             "INSERT INTO USERS (ID, NAME) VALUES ('{}', '{}')".format(str(id), str(name))
         )
 
-    except Exception:
-        pass
+        con.commit()
+        con.close()
 
-    con.commit()
-    con.close()
+    except Exception:
+        con.commit()
+        con.close()
