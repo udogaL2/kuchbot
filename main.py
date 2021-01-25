@@ -55,14 +55,12 @@ class P_schedule():
         schedule.every().wednesday.at("09:40").do(P_schedule.send_message1)
         schedule.every().friday.at("07:40").do(P_schedule.send_message1)
         schedule.every().friday.at("08:40").do(P_schedule.send_message1)
-        schedule.every().monday.at("13:20").do(P_schedule.send_message2)
-        schedule.every().tuesday.at("10:35").do(P_schedule.send_message2)
-        schedule.every().wednesday.at("08:45").do(P_schedule.send_message2)
-        schedule.every().wednesday.at("09:45").do(P_schedule.send_message2)
-        schedule.every().friday.at("07:45").do(P_schedule.send_message2)
-        schedule.every().friday.at("08:45").do(P_schedule.send_message2)
-
-        schedule.every().monday.at("15:03").do(P_schedule.send_message1)
+        schedule.every().monday.at("13:10").do(P_schedule.send_message2)
+        schedule.every().tuesday.at("10:25").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("08:35").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("09:35").do(P_schedule.send_message2)
+        schedule.every().friday.at("07:35").do(P_schedule.send_message2)
+        schedule.every().friday.at("08:35").do(P_schedule.send_message2)
 
         while True:
             schedule.run_pending()
