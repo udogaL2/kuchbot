@@ -16,8 +16,9 @@ item1 = types.KeyboardButton("Где куч?")
 item2 = types.KeyboardButton("Через сколько придет куч?")
 item3 = types.KeyboardButton("Сколько времени куч будет в классе?")
 item4 = types.KeyboardButton("Хто я?")
+item5 = types.KeyboardButton("Что поставите?")
 
-main_markup.add(item1, item2, item3, item4)
+main_markup.add(item1, item2, item3, item4, item5)
 
 # ________________________________
 
@@ -102,6 +103,11 @@ def give_id(msg):
         bot.send_message(msg.chat.id, '\n'.join(s))
 
 
+@bot.message_handler(commands=['help'])
+def give_help(msg):
+    bot.send_message(msg.chat.id, 'Ты хорошая девочка?', reply_markup=main_markup)
+
+
 @bot.message_handler(content_types=['text'])
 def ans(msg):
     if msg.chat.type == 'private':
@@ -134,6 +140,13 @@ def ans(msg):
             elif s == 3:
                 m = 'Куч будет в классе 3 секунды. Вам не повезло! Молитесь, чтоб не было Черниковой рядом... Шанс равен 5%.'
             bot.send_message(msg.chat.id, m, reply_markup=main_markup)
+        elif msg.text == 'Что поставите?':
+            markup = types.InlineKeyboardMarkup(row_width=2)
+            it1 = types.InlineKeyboardButton("Да✔", callback_data='yes')
+            it2 = types.InlineKeyboardButton("Нет❌", callback_data='no')
+
+            markup.add(it1, it2)
+            bot.send_message(msg.chat.id, 'Ты хорошая девочка?', reply_markup=markup)
         elif msg.text == "Хто я?":
             bot.send_message(msg.chat.id, choice(NAMES), reply_markup=main_markup)
         elif msg.text == 'Зачем?':
@@ -162,6 +175,7 @@ def ans(msg):
         elif msg.text == 'За сколько?':
             bot.send_message(msg.chat.id, '300$!', reply_markup=main_markup)
 
+
         else:
             bot.send_message(msg.chat.id, 'Зачем мне писать что-то, кроме сообщений о местоположении куча?',
                              reply_markup=main_markup)
@@ -171,6 +185,39 @@ def ans(msg):
 def sticker(msg):
     sti = open('img/sticker.webp', 'rb')
     bot.send_sticker(msg.chat.id, sti)
+    sti.close()
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    try:
+        if call.message:
+            if call.data == 'yes':
+                mark = choice([5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 6, 6, 3, 3, 3, 3, 3])
+                if mark == 6:
+                    text = 'Я поставлю тебе ' + str(mark) + '. Да, именно 6, ты ведь хорошая девочка)00))0).'
+                elif mark == 3:
+                    text = 'Я поставлю тебе ' + str(mark) + '. У меня хорошие девочки тоже получают тройки.'
+                else:
+                    text = 'Я поставлю тебе ' + str(mark)
+            elif call.data == 'no':
+                mas = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
+                text = 'Я поставлю тебе ' + str(choice(mas))
+
+            # remove inline buttons
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                  text=text, reply_markup=None)
+            if mark == 6:
+                sti = open('img/kappa.webp', 'rb')
+                bot.send_sticker(call.message.chat.id, sti)
+                sti.close()
+            elif call.data == 'yes' and mark == 3:
+                sti = open('img/sticker.webp', 'rb')
+                bot.send_sticker(call.message.chat.id, sti)
+                sti.close()
+
+    except Exception as e:
+        print(repr(e))
 
 
 if __name__ == '__main__':
