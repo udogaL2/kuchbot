@@ -46,13 +46,13 @@ def start_process():
 
 class P_schedule():
     def start_schedule():
-        schedule.every().monday.at("14:20").do(P_schedule.send_message1)
+        schedule.every().monday.at("15:15").do(P_schedule.send_message1)
         schedule.every().tuesday.at("12:30").do(P_schedule.send_message1)
         schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
         schedule.every().wednesday.at("11:40").do(P_schedule.send_message1)
         schedule.every().friday.at("09:40").do(P_schedule.send_message1)
         schedule.every().friday.at("10:40").do(P_schedule.send_message1)
-        schedule.every().monday.at("14:25").do(P_schedule.send_message2)
+        schedule.every().monday.at("15:20").do(P_schedule.send_message2)
         schedule.every().tuesday.at("12:35").do(P_schedule.send_message2)
         schedule.every().wednesday.at("10:45").do(P_schedule.send_message2)
         schedule.every().wednesday.at("11:45").do(P_schedule.send_message2)
@@ -74,7 +74,7 @@ class P_schedule():
             bot.send_message(i, 'Я обязательно приду!')
 
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['start', 'restart'])
 def welcome(msg):
     bot.send_message(msg.chat.id,
                      '''Добро пожаловать, {0.first_name}! \nМеня зовут <b>"{1.first_name} - бот"</b>. 
@@ -87,15 +87,7 @@ def welcome(msg):
         parse_mode='html')
 
     make_user(msg.from_user.id, msg.from_user.username)
-
-
-@bot.message_handler(commands=['restart'])
-def welcome(msg):
-    bot.send_message(msg.chat.id,
-                     '''Добро пожаловать, {0.first_name}! \nМеня зовут <b>"{1.first_name} - бот"</b>. 
-Я расскажу тебе всё о местоположении куча на данный момент.'''.format(
-                         msg.from_user, bot.get_me()),
-                     parse_mode='html', reply_markup=main_markup)
+    print('new user')
 
 
 @bot.message_handler(content_types=['text'])
