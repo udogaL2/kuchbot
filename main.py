@@ -47,6 +47,7 @@ def start_process():
 class P_schedule():
     def start_schedule():
         schedule.every().monday.at("15:15").do(P_schedule.send_message1)
+        schedule.every().monday.at("14:55").do(P_schedule.send_message1)
         schedule.every().tuesday.at("12:30").do(P_schedule.send_message1)
         schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
         schedule.every().wednesday.at("11:40").do(P_schedule.send_message1)
