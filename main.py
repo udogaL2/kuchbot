@@ -48,6 +48,7 @@ def start_process():
 class P_schedule():
     def start_schedule():
         print('Start')
+        # -2 часа для heroku
         schedule.every().monday.at("13:15").do(P_schedule.send_message1)
         schedule.every().tuesday.at("10:30").do(P_schedule.send_message1)
         schedule.every().wednesday.at("08:40").do(P_schedule.send_message1)
