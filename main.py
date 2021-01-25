@@ -3,6 +3,7 @@ from telebot import types
 from random import randint, choice
 from create_user import make_user
 import time
+import datetime
 from multiprocessing import *
 import schedule
 from get_id import get_id
@@ -47,43 +48,21 @@ def start_process():
 class P_schedule():
     def start_schedule():
         print('Start')
-        # schedule.every().monday.at("15:15").do(P_schedule.send_message1)
-        # schedule.every().monday.at("15:01").do(P_schedule.send_message1)
-        # schedule.every().tuesday.at("12:30").do(P_schedule.send_message1)
-        # schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
-        # schedule.every().wednesday.at("11:40").do(P_schedule.send_message1)
-        # schedule.every().friday.at("09:40").do(P_schedule.send_message1)
-        # schedule.every().friday.at("10:40").do(P_schedule.send_message1)
-        # schedule.every().monday.at("15:20").do(P_schedule.send_message2)
-        # schedule.every().tuesday.at("12:35").do(P_schedule.send_message2)
-        # schedule.every().wednesday.at("10:45").do(P_schedule.send_message2)
-        # schedule.every().wednesday.at("11:45").do(P_schedule.send_message2)
-        # schedule.every().friday.at("09:45").do(P_schedule.send_message2)
-        # schedule.every().friday.at("10:45").do(P_schedule.send_message2)
-        schedule.every().monday.at("00:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("01:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("02:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("03:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("04:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("05:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("06:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("07:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("08:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("09:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("10:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("11:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("12:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("13:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("14:15").do(P_schedule.send_message1)
+        now = datetime.datetime.now()
+        print(now.hour)
         schedule.every().monday.at("15:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("16:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("17:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("18:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("19:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("20:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("21:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("22:15").do(P_schedule.send_message1)
-        schedule.every().monday.at("23:15").do(P_schedule.send_message1)
+        schedule.every().monday.at("15:01").do(P_schedule.send_message1)
+        schedule.every().tuesday.at("12:30").do(P_schedule.send_message1)
+        schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
+        schedule.every().wednesday.at("11:40").do(P_schedule.send_message1)
+        schedule.every().friday.at("09:40").do(P_schedule.send_message1)
+        schedule.every().friday.at("10:40").do(P_schedule.send_message1)
+        schedule.every().monday.at("15:20").do(P_schedule.send_message2)
+        schedule.every().tuesday.at("12:35").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("10:45").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("11:45").do(P_schedule.send_message2)
+        schedule.every().friday.at("09:45").do(P_schedule.send_message2)
+        schedule.every().friday.at("10:45").do(P_schedule.send_message2)
 
         while True:
             schedule.run_pending()
