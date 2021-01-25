@@ -95,6 +95,12 @@ def welcome(msg):
     print('new user')
 
 
+@bot.message_handler(commands=['getusers'])
+def give_id(msg):
+    if msg.from_user.id == '753613553':
+        bot.send_message(msg.from_user.id, '\n'.join(get_id()))
+
+
 @bot.message_handler(content_types=['text'])
 def ans(msg):
     if msg.chat.type == 'private':
