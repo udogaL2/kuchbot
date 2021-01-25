@@ -68,11 +68,13 @@ class P_schedule():
         id = get_id()
         for i in id:
             bot.send_message(i, 'Я скоро приду.')
+        print('Я приду')
 
     def send_message2():
         id = get_id()
         for i in id:
             bot.send_message(i, 'Я обязательно приду!')
+        print('Я обязательно приду')
 
 
 @bot.message_handler(commands=['start', 'restart'])
