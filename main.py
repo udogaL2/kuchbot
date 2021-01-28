@@ -50,18 +50,18 @@ class P_schedule():
     def start_schedule():
         print('Start')
         # -2 часа для heroku
-        schedule.every().monday.at("13:15").do(P_schedule.send_message1)
-        schedule.every().tuesday.at("10:30").do(P_schedule.send_message1)
-        schedule.every().wednesday.at("08:40").do(P_schedule.send_message1)
+        schedule.every().monday.at("14:15").do(P_schedule.send_message1)
+        schedule.every().tuesday.at("11:30").do(P_schedule.send_message1)
         schedule.every().wednesday.at("09:40").do(P_schedule.send_message1)
-        schedule.every().friday.at("07:40").do(P_schedule.send_message1)
+        schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
         schedule.every().friday.at("08:40").do(P_schedule.send_message1)
-        schedule.every().monday.at("13:10").do(P_schedule.send_message2)
-        schedule.every().tuesday.at("10:25").do(P_schedule.send_message2)
-        schedule.every().wednesday.at("08:35").do(P_schedule.send_message2)
+        schedule.every().friday.at("09:40").do(P_schedule.send_message1)
+        schedule.every().monday.at("14:10").do(P_schedule.send_message2)
+        schedule.every().tuesday.at("11:25").do(P_schedule.send_message2)
         schedule.every().wednesday.at("09:35").do(P_schedule.send_message2)
-        schedule.every().friday.at("07:35").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("10:35").do(P_schedule.send_message2)
         schedule.every().friday.at("08:35").do(P_schedule.send_message2)
+        schedule.every().friday.at("09:35").do(P_schedule.send_message2)
 
         while True:
             schedule.run_pending()
@@ -70,13 +70,13 @@ class P_schedule():
     def send_message1():
         id = [i[0] for i in get_id()]
         for i in id:
-            bot.send_message(i, 'Я скоро приду.')
+            bot.send_message(int(i), 'Я скоро приду.')
         print('Я приду')
 
     def send_message2():
         id = [i[0] for i in get_id()]
         for i in id:
-            bot.send_message(i, 'Я обязательно приду!')
+            bot.send_message(int(i), 'Я обязательно приду!')
         print('Я обязательно приду')
 
 
@@ -110,7 +110,7 @@ def give_help(msg):
 соответствующими доступным вариантам действий. Если клавиатура с кнопками пропала, нажмите на иконку в правой части \
 поля ввода, и она появится.\n Доступные команды:\n<em>• "Где куч?"</em> - бот расскажет о местоположении куча;\n<em>• \
 "Через сколько придет куч?"</em> - бот расскажет о времени прибытия куча;\n<em>• "Сколько времени куч будет в классе?"\
-</em> - бот спрогнозирует сремя нахождения куча в классе;\n<em>• "Хто я?"</em> - бот даст вам имя по-кучуевски;\n<em>• \
+</em> - бот спрогнозирует время нахождения куча в классе;\n<em>• "Хто я?"</em> - бот даст вам имя по-кучуевски;\n<em>• \
 "Что поставите?"</em> - бот поставит вам оценку, основываясь только на одном факте (по-моему он так и ставит оценки, \
 лол)''', reply_markup=main_markup, parse_mode='html')
 
