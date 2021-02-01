@@ -49,19 +49,13 @@ def start_process():
 class P_schedule():
     def start_schedule():
         print('Start')
-        # -2 часа для heroku
-        schedule.every().monday.at("14:15").do(P_schedule.send_message1)
-        schedule.every().tuesday.at("11:30").do(P_schedule.send_message1)
-        schedule.every().wednesday.at("09:40").do(P_schedule.send_message1)
-        schedule.every().wednesday.at("10:40").do(P_schedule.send_message1)
-        schedule.every().friday.at("08:40").do(P_schedule.send_message1)
-        schedule.every().friday.at("09:40").do(P_schedule.send_message1)
-        schedule.every().monday.at("14:10").do(P_schedule.send_message2)
-        schedule.every().tuesday.at("11:25").do(P_schedule.send_message2)
-        schedule.every().wednesday.at("09:35").do(P_schedule.send_message2)
-        schedule.every().wednesday.at("10:35").do(P_schedule.send_message2)
-        schedule.every().friday.at("08:35").do(P_schedule.send_message2)
+        # -1 часа для heroku
+        schedule.every().monday.at("13:55").do(P_schedule.send_message2)
+        schedule.every().tuesday.at("12:10").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("10:25").do(P_schedule.send_message2)
+        schedule.every().wednesday.at("11:15").do(P_schedule.send_message2)
         schedule.every().friday.at("09:35").do(P_schedule.send_message2)
+        schedule.every().friday.at("10:25").do(P_schedule.send_message2)
 
         while True:
             schedule.run_pending()
@@ -71,12 +65,14 @@ class P_schedule():
         id = [i[0] for i in get_id()]
         for i in id:
             bot.send_message(int(i), 'Я скоро приду.')
+            time.sleep(5)
         print('Я приду')
 
     def send_message2():
         id = [i[0] for i in get_id()]
         for i in id:
             bot.send_message(int(i), 'Я обязательно приду!')
+            time.sleep(5)
         print('Я обязательно приду')
 
 
